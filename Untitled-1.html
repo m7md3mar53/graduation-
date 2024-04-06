@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+        
+    <input type="file" id="imageInput" accept="image/*">
+
+  <br><br>
+
+  <button class="cta" onclick="encodeImage()"> 
+    <span>تشفير الصورة</span>
+      <path d="M1,5 L11,5"></path>
+      <polyline points="8 1 12 5 8 9"></polyline>
+    </svg>
+  </button>
+
+  <button class="cta" onclick="decodeImage()">
+    <span>فك تشفير الصورة </span>
+      <path d="M1,5 L11,5"></path>
+      <polyline points="8 1 12 5 8 9"></polyline>
+    </svg>
+  </button>
+  <br><br>
+  <img id="encodedImage" src="" alt="صورة مشفرة" class="a1">
+  <br>
+  <img id="decodedImage" src="" alt="صورة مفككة" class="a1"> 
+    </center> 
+  
+  
+  <script src="script.js"></script>
+</body>
+</html>

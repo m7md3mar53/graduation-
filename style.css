@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap');
+ body{
+    font-family: "Lateef", serif;
+    font-size: 30px;
+    margin: 100px;
+    background: #427d9da1;
+    color: #fff;
+ }
+
+#imageInput {
+    margin-bottom: 10px;
+  }
+  #encodedImage, #decodedImage {
+    max-width: 500px;
+    margin-bottom: 10px;
+  }
+  #imageInput {
+margin-bottom: 10px;
+}
+#encodedImage, #decodedImage {
+max-width: 500px;
+margin-bottom: 10px;
+}
+
+
+
+
+.cta {
+    position: relative;
+    margin: auto;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50px;
+    background: #9BBEC8;
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+  }
+  
+  .cta span {
+    position: relative;
+    /* font-family: "Ubuntu", sans-serif; */
+    font-family: "Lateef", serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #fff;
+  }
+  
+  .cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #9BBEC8;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+  }
+  
+  .cta:hover:before {
+    width: 100%;
+    background: #9BBEC8;
+  }
+  
+  .cta:hover svg {
+    transform: translateX(0);
+  }
+  
+  .cta:active {
+    transform: scale(0.95);
+  }
+  
+
+
+
+
+  .input-div {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgb(1, 235, 252);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0px 0px 100px rgb(1, 235, 252) , inset 0px 0px 10px rgb(1, 235, 252),0px 0px 5px rgb(255, 255, 255);
+    animation: flicker 2s linear infinite;
+  }
+  
+  .icon {
+    color: rgb(1, 235, 252);
+    font-size: 2rem;
+    cursor: pointer;
+    animation: iconflicker 2s linear infinite;
+  }
+  
+  .input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer !important;
+  }
+  
+  @keyframes flicker {
+    0% {
+      border: 2px solid rgb(1, 235, 252);
+      box-shadow: 0px 0px 100px rgb(1, 235, 252) , inset 0px 0px 10px rgb(1, 235, 252),0px 0px 5px rgb(255, 255, 255);
+    }
+  
+    5% {
+      border: none;
+      box-shadow: none;
+    }
+  
+    10% {
+      border: 2px solid rgb(1, 235, 252);
+      box-shadow: 0px 0px 100px rgb(1, 235, 252) , inset 0px 0px 10px rgb(1, 235, 252),0px 0px 5px rgb(255, 255, 255);
+    }
+  
+    25% {
+      border: none;
+      box-shadow: none;
+    }
+  
+    30% {
+      border: 2px solid rgb(1, 235, 252);
+      box-shadow: 0px 0px 100px rgb(1, 235, 252) , inset 0px 0px 10px rgb(1, 235, 252),0px 0px 5px rgb(255, 255, 255);
+    }
+  
+    100% {
+      border: 2px solid rgb(1, 235, 252);
+      box-shadow: 0px 0px 100px rgb(1, 235, 252) , inset 0px 0px 10px rgb(1, 235, 252),0px 0px 5px rgb(255, 255, 255);
+    }
+  }
+  
+  @keyframes iconflicker {
+    0% {
+      opacity: 1;
+    }
+  
+    5% {
+      opacity: 0.2;
+    }
+  
+    10% {
+      opacity: 1;
+    }
+  
+    25% {
+      opacity: 0.2;
+    }
+  
+    30% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+  .a1{
+    font-family: "Lateef", serif;
+  }
