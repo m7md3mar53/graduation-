@@ -1,0 +1,163 @@
+/* Custom font import for consistent typography */
+@import url('https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap');
+
+/* General styling for the body */
+body {
+    font-family: "Lateef", serif;
+    font-size: 18px; /* Standard font size for better readability */
+    margin: 20px; /* Consistent margin for flexibility */
+    background: rgba(66, 125, 157, 0.8); /* Semi-transparent background */
+    color: #ffffff; /* Text color */
+}
+
+/* Styling for file input */
+#imageInput {
+    margin-bottom: 10px; /* Spacing below the input */
+    cursor: pointer; /* Change cursor to indicate interactivity */
+}
+
+/* Styling for images */
+#previewImage, #encodedImage, #decodedImage {
+    max-width: 500px; /* Limit the width for consistent layout */
+    margin-bottom: 10px; /* Space between elements */
+    border: 1px solid #ccc; /* Border for visual separation */
+    padding: 10px; /* Padding for additional space around the image */
+}
+
+/* Styling for buttons */
+.cta {
+    position: relative;
+    margin: auto;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    cursor: pointer; /* Indicates it's clickable */
+    font-family: "Lateef", serif;
+    font-weight: 700; /* Bold for emphasis */
+    font-size: 16px; /* Reasonable button text size */
+    color: #ffffff;
+}
+
+.cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50px;
+    background: #9BBEC8; /* Light blue background */
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+}
+
+.cta span {
+    position: relative;
+    letter-spacing: 0.05em; /* Slight spacing between letters */
+}
+
+.cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px; /* Space between text and icon */
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #9BBEC8;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+    width: 100%; /* Expand background on hover */
+}
+
+.cta:hover svg {
+    transform: translateX(0); /* Return icon position on hover */
+}
+
+.cta:active {
+    transform: scale(0.95); /* Slight scaling effect when active */
+}
+
+/* Styling for input-div and associated animations */
+.input-div {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgb(1, 235, 252); /* Bright blue border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    animation: flicker 2s linear infinite; /* Constant flicker animation */
+}
+
+.icon {
+    color: rgb(1, 235, 252); /* Bright blue color for icons */
+    font-size: 2rem; /* Icon size */
+    cursor: pointer; /* Indicates interactivity */
+    animation: iconflicker 2s linear infinite; /* Flickering animation for icons */
+}
+
+.input {
+    position: absolute;
+    opacity: 0; /* Hidden input */
+    width: 100%;
+    height: 100%;
+    cursor: pointer; /* Indicates interactivity */
+}
+
+/* Flickering animations for input-div */
+@keyframes flicker {
+    0% {
+        border: 2px solid rgb(1, 235, 252);
+        box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+    5% {
+        border: none;
+        box-shadow: none;
+    }
+    10% {
+        border: 2px solid rgb(1, 235, 252);
+        box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+    25% {
+        border: none;
+        box-shadow: none;
+    }
+    30% {
+        border: 2px solid rgb(1, 235, 252);
+        box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+    100% {
+        border: 2px solid rgb(1, 235, 252);
+        box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+}
+
+/* Animation for icons */
+@keyframes iconflicker {
+    0% {
+        opacity: 1;
+    }
+    5% {
+        opacity: 0.2;
+    }
+    10% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.2;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Cryptography with Rubik's Principle</title>
+    <script>
+        // Function to preview an image from file input
+        function previewImage() {
+            const input = document.getElementById("imageInput");
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById("previewImage");
+                    img.src = e.target.result; // Set the source to the loaded image
+                };
+
+                reader.readAsDataURL(file); // Read the file data
+            }
+        }
+
+        // Function called when the page loads
+        function onload() {
+            console.log("Page loaded successfully.");
+        }
+
+        // Function to download the current image
+        function downloadImage() {
+            const img = document.getElementById("previewImage");
+            if (img.src) {
+                const link = document.createElement("a");
+                link.href = img.src;
+                link.download = "downloaded_image.jpg"; // Name of the downloaded file
+                link.click(); // Trigger the download
+            }
+        }
+
+        // Function to download a key (as a text file)
+        function downloadKey(keyContent) {
+            const blob = new Blob([keyContent], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "encryption_key.txt"; // Default key file name
+            link.click(); // Trigger the download
+        }
+
+        // Function to toggle the visibility of an element
+        function toggleState(elementId) {
+            const element = document.getElementById(elementId);
+            element.style.display = element.style.display === "none" ? "block" : "none";
+        }
+
+        // Function to preview some text
+        function previewText(text) {
+            const textElement = document.getElementById("previewText");
+            textElement.innerText = text; // Set the displayed text
+        }
+
+        // Function to apply Rubik's Cube-based encryption (shuffle blocks)
+        function rubiksEncrypt(image, blockSize) {
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+            const img = document.createElement("img");
+            img.src = image.src;
+
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                context.drawImage(img, 0, 0);
+
+                const blocksX = Math.ceil(canvas.width / blockSize);
+                const blocksY = Math.ceil(canvas.height / blockSize);
+
+                // Create an array to hold blocks
+                const blocks = [];
+
+                for (let by = 0; by < blocksY; by++) {
+                    for (let bx = 0; bx < blocksX; bx++) {
+                        const block = context.getImageData(bx * blockSize, by * blockSize, blockSize, blockSize);
+                        blocks.push({ x: bx, y: by, data: block });
+                    }
+                }
+
+                // Shuffle the blocks
+                blocks.sort(() => Math.random() - 0.5);
+
+                // Create a new canvas to hold the shuffled blocks
+                const shuffledCanvas = document.createElement("canvas");
+                shuffledCanvas.width = canvas.width;
+                shuffledCanvas.height = canvas.height;
+                const shuffledContext = shuffledCanvas.getContext("2d");
+
+                blocks.forEach((block, index) => {
+                    const x = (index % blocksX) * blockSize;
+                    const y = Math.floor(index / blocksX) * blockSize;
+                    shuffledContext.putImageData(block.data, x, y);
+                });
+
+                // Show the shuffled (encrypted) image
+                const previewImage = document.getElementById("previewImage");
+                previewImage.src = shuffledCanvas.toDataURL("image/jpeg");
+            };
+        }
+
+        // Function to apply Rubik's Cube-based decryption (unscramble blocks)
+        function rubiksDecrypt(encryptedImage, blockSize) {
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+            const img = document.createElement("img");
+            img.src = encryptedImage.src;
+
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                context.drawImage(img, 0, 0);
+
+                const blocksX = Math.ceil(canvas.width / blockSize);
+                const blocksY = Math.ceil(canvas.height / blockSize);
+
+                // Create an array to hold blocks
+                const blocks = [];
+
+                for (let by = 0; by < blocksY; by++) {
+                    for (let bx = 0; bx < blocksX; bx++) {
+                        const block = context.getImageData(bx * blockSize, by * blockSize, blockSize, blockSize);
+                        blocks.push({ x: bx, y: by, data: block });
+                    }
+                }
+
+                // Unshuffle the blocks (reverse the shuffle)
+                blocks.sort((a, b) => a.x - b.x || a.y - b.y);
+
+                // Create a new canvas to hold the unscrambled blocks
+                const decryptedCanvas = document.createElement("canvas");
+                decryptedCanvas.width = canvas.width;
+                decryptedCanvas.height = canvas.height;
+                const decryptedContext = decryptedCanvas.getContext("2d");
+
+                blocks.forEach((block, index) => {
+                    const x = (index % blocksX) * blockSize;
+                    const y = Math.floor(index / blocksX) * blockSize;
+                    decryptedContext.putImageData(block.data, x, y);
+                });
+
+                // Show the unscrambled (decrypted) image
+                const previewImage = document.getElementById("previewImage");
+                previewImage.src = decryptedCanvas.toDataURL("image/jpeg");
+            };
+        }
+    </script>
+</head>
+<body onload="onload()">
+    <h1>Rubik's Cube-based Image Cryptography</h1>
+
+    <!-- File input for image selection -->
+    <input type="file" id="imageInput" onchange="previewImage()">
+
+    <!-- Image preview area -->
+    <div>
+        <img id="previewImage" alt="Previewed Image" style="max-width: 300px; border: 1px solid #ccc;">
+    </div>
+
+    <!-- Button to apply Rubik's Cube encryption -->
+    <button onclick="rubiksEncrypt(document.getElementById('previewImage'), 32)">Encrypt with Rubik's Principle</button>
+
+    <!-- Button to apply Rubik's Cube decryption -->
+    <button onclick="rubiksDecrypt(document.getElementById('previewImage'), 32)">Decrypt with Rubik's Principle</button>
+
+    <!-- Button to download the image -->
+    <button onclick="downloadImage()">Download Image</button>
+
+    <!-- Button to download a sample key -->
+    <button onclick="downloadKey('Sample Encryption Key')">Download Key</button>
+
+    <!-- Button to toggle visibility of a hidden element -->
+    <button onclick="toggleState('toggleElement')">Toggle Hidden Message</button>
+
+    <!-- Hidden element to toggle -->
+    <div id="toggleElement" style="display: none;">
+        This is a hidden message.
+    </div>
+
+    <!-- Button to preview text -->
+    <button onclick="previewText('This is a sample text preview.')">Preview Text</button>
+
+    <!-- Text preview area -->
+    <div id="previewText"></div>
+</body>
+</html>
